@@ -82,9 +82,32 @@ const findLetters = (string, shiftedLowerCase, shiftedUpperCase) => {
 }
 
 
+const analyzeArray = (numArray) => {
+    const avg = numArray.reduce((total, currentNum) => {
+        return total + currentNum;
+    }) / numArray.length;
+
+    let max = numArray[0];
+    let min = numArray[0];
+
+    for (const num of numArray) {
+        if (num > max) max = num;
+        if (num < min) min = num;
+    }
+
+    return {
+        average: avg,
+        min: min,
+        max: max,
+        length: numArray.length
+    }
+}
+
+
 module.exports = {
     capitalize,
     reverseString,
     calculator,
     caesarCipher,
+    analyzeArray
 };
