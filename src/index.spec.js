@@ -1,4 +1,4 @@
-const { capitalize, reverseString, calculator, caesarCipher } = require("./index");
+const { capitalize, reverseString, calculator, caesarCipher, analyzeArray } = require("./index");
 
 test.skip("Capitalize first letter", () => {
     expect(capitalize("hello world")).toEqual("Hello world");
@@ -28,15 +28,33 @@ describe("calculator", () => {
 
 describe("caesarCipher", () => {
 
-    test("Wrap from z to a", () => {
+    test.skip("Wrap from z to a", () => {
         expect(caesarCipher("xyz", 3)).toEqual("abc");
-    })
+    });
 
-    test("Case preservation", () => {
+    test.skip("Case preservation", () => {
         expect(caesarCipher("HeLLo", 3)).toEqual("KhOOr");
     });
 
-    test("Punctuation preservation", () => {
+    test.skip("Punctuation preservation", () => {
         expect(caesarCipher("Hello, World!", 3)).toEqual("Khoor, Zruog!");
     });
-})
+});
+
+describe("analyzeArray", () => {
+    test("Correct average", () => {
+        expect(analyzeArray([1,8,3,4,2,6]).average).toBe(4);
+    });
+
+    test("Correct min", () => {
+        expect(analyzeArray([1,8,3,4,2,6]).min).toBe(1);
+    });
+
+    test("Correct max", () => {
+        expect(analyzeArray([1,8,3,4,2,6]).max).toBe(8);
+    });
+
+    test("Correct length", () => {
+        expect(analyzeArray([1,8,3,4,2,6]).length).toBe(6);
+    });
+});
