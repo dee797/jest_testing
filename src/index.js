@@ -34,8 +34,57 @@ const calculator = (function() {
 })();
 
 
+const caesarCipher = (string, shiftFactor) => {
+    const [shiftedLowerCase, shiftedUpperCase] = shiftAlphabet(shiftFactor);
+    const newString = findLetters(string, shiftedLowerCase, shiftedUpperCase);
+    return newString;
+}
+
+
+const shiftAlphabet = shiftFactor => {
+    const shiftedAlphabet = [];
+    const ALPHABET = "abcdefghijklmnopqrstuvwxyz";
+
+    for (let i=0; i < ALPHABET.length; i++) {
+        if (i + shiftFactor > ALPHABET.length - 1) {
+            shiftedAlphabet[i] = ALPHABET[(i + shiftFactor) - 26];
+        } else {
+            shiftedAlphabet[i] = ALPHABET[i + shiftFactor];
+        }
+    }
+
+    const lowerCase = shiftedAlphabet.join("");
+    const upperCase = lowerCase.toUpperCase();
+
+    return [lowerCase, upperCase];
+}
+
+
+const findLetters = (string, shiftedLowerCase, shiftedUpperCase) => {
+    const lowerALPHABET = "abcdefghijklmnopqrstuvwxyz";
+    const upperALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    let newString = "";
+    let index;
+
+    for (let i=0; i < string.length; i++) {
+        if (lowerALPHABET.includes(string[i])) {
+            index = lowerALPHABET.indexOf(string[i]);
+            newString += shiftedLowerCase[index];
+        } else if (upperALPHABET.includes(string[i])) {
+            index = upperALPHABET.indexOf(string[i]);
+            newString += shiftedUpperCase[index];
+        } else {
+            newString += string[i];
+        }
+    }
+
+    return newString;
+}
+
+
 module.exports = {
     capitalize,
     reverseString,
     calculator,
+    caesarCipher,
 };
